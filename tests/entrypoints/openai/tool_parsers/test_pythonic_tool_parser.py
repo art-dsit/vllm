@@ -37,6 +37,11 @@ PARAMETERLESS_FUNCTION_CALL = FunctionCall(
     name="get_weather",
     arguments='{}',
 )
+NUMERIC_FUNCTION_OUTPUT = "add_numbers(num1=1, num2=-2)"
+NUMERIC_FUNCTION_CALL = FunctionCall(
+    name="add_numbers",
+    arguments='{"num1": 1, "num2": -2}',
+)
 EMPTY_DICT_FUNCTION_OUTPUT = "do_something_cool(additional_data={})"
 EMPTY_DICT_FUNCTION_CALL = FunctionCall(
     name="do_something_cool",
@@ -91,6 +96,12 @@ TEST_CASES = [
                  f"[{PARAMETERLESS_FUNCTION_OUTPUT}]",
                  [PARAMETERLESS_FUNCTION_CALL],
                  id="parameterless_nonstreaming"),
+    pytest.param(True,
+                 f"[{NUMERIC_FUNCTION_OUTPUT}]", [NUMERIC_FUNCTION_CALL],
+                 id="empty_dict_streaming"),
+    pytest.param(False,
+                 f"[{NUMERIC_FUNCTION_OUTPUT}]", [NUMERIC_FUNCTION_CALL],
+                 id="empty_dict_nonstreaming"),
     pytest.param(True,
                  f"[{EMPTY_DICT_FUNCTION_OUTPUT}]", [EMPTY_DICT_FUNCTION_CALL],
                  id="empty_dict_streaming"),
